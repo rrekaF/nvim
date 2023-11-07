@@ -33,10 +33,21 @@ vim.cmd([[
 --     run = string, function, or table, -- Specify operations to be run after successful installs/updates of a plugin
 return require('packer').startup(function(use)
     -- Packer can manage itself
+    use {
+      'nvim-tree/nvim-tree.lua',
+      requires = {
+      'nvim-tree/nvim-web-devicons', -- optional
+      },
+    }
+    use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
     use 'wbthomason/packer.nvim'
     use "rebelot/kanagawa.nvim"
     use { 'williamboman/mason.nvim' }
     use { 'williamboman/mason-lspconfig.nvim'}   
+    use "lukas-reineke/indent-blankline.nvim"
     use { 'neovim/nvim-lspconfig' }
     use { 'hrsh7th/nvim-cmp', config = [[require('config.nvim-cmp')]] }    
     use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' } 
@@ -52,6 +63,7 @@ return require('packer').startup(function(use)
             ts_update()
         end,
     }
+    use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
     -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     ---------------------------------------
     -- NOTE: PUT YOUR THIRD PLUGIN HERE --
@@ -63,3 +75,4 @@ return require('packer').startup(function(use)
         require('packer').sync()
     end
 end)
+
